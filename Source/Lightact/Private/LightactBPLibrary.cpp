@@ -14,7 +14,7 @@ ULightactBPLibrary::ULightactBPLibrary(const FObjectInitializer& ObjectInitializ
 
 }
 
-// test opis
+/* Reads a JSON string from shared memory file and outputs a map of strings to strings. */
 void ULightactBPLibrary::BuildMap(const FString HandleName, const int HandleSize, TMap<FString, FString>& resultMap, bool& success) {
 
 	HANDLE hMapFile;
@@ -48,34 +48,30 @@ void ULightactBPLibrary::BuildMap(const FString HandleName, const int HandleSize
 				CloseHandle(hMapFile);
 				success = true;
 
-			}
-			else {
+			} else {
 				resultMap.Add("Error", "Has Parse Error");
 				CloseHandle(hMapFile);
 				success = false;
 			}
-
-		}
-		else {
+		} else {
 			resultMap.Add("Error", "Could not map view of file");
 			CloseHandle(hMapFile);
 			success = false;
 		}
-
-	}
-	else {
+	} else {
 		resultMap.Add("Error", "Could not open file mapping object");
 		success = false;
 	}
-
 }
 
+/* Splits string by delimiters and returns a composed 3-D space vector. */
 void ULightactBPLibrary::StringExplode(const FString InputString, const FString Delimiters, FVector& Vector) {
 
+	// add default values
 	TArray<float> OutConverts;
-	OutConverts.Add(0.f); // X
-	OutConverts.Add(0.f); // Y
-	OutConverts.Add(0.f); // Z
+	OutConverts.Add(0.f);
+	OutConverts.Add(0.f);
+	OutConverts.Add(0.f);
 
 	TArray<FString> OutSplits;
 	int len = InputString.ParseIntoArray(OutSplits, Delimiters.GetCharArray().GetData(), true);
@@ -83,7 +79,7 @@ void ULightactBPLibrary::StringExplode(const FString InputString, const FString 
 	for (int i = 0; i < min(len, 3); i++) {
 		OutConverts[i] = FCString::Atof(OutSplits[i].GetCharArray().GetData());
 	}
-
+		
 	Vector = FVector(OutConverts[0], OutConverts[1], OutConverts[2]);
 
 }
