@@ -70,3 +70,20 @@ void ULightactBPLibrary::BuildMap(const FString HandleName, const int HandleSize
 
 }
 
+void ULightactBPLibrary::StringExplode(const FString InputString, const FString Delimiters, FVector& Vector) {
+
+	TArray<float> OutConverts;
+	OutConverts.Add(0.f); // X
+	OutConverts.Add(0.f); // Y
+	OutConverts.Add(0.f); // Z
+
+	TArray<FString> OutSplits;
+	int len = InputString.ParseIntoArray(OutSplits, Delimiters.GetCharArray().GetData(), true);
+
+	for (int i = 0; i < min(len, 3); i++) {
+		OutConverts[i] = FCString::Atof(OutSplits[i].GetCharArray().GetData());
+	}
+
+	Vector = FVector(OutConverts[0], OutConverts[1], OutConverts[2]);
+
+}
