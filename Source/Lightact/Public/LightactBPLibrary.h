@@ -30,6 +30,6 @@ class ULightactBPLibrary : public UBlueprintFunctionLibrary
 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Shared memory JSON to string map", Keywords = "Lightact shared memory JSON to string map", ToolTip = "Reads a JSON string from shared memory file and outputs a map of strings to strings."), Category = "Lightact")
 	static void BuildMap(const FString HandleName, const int HandleSize, TMap<FString, FString>& ResultMap, bool& Success);
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "String explode to Vector", Keywords = "Lightact string explode to vector", ToolTip = "Splits string by delimiters and returns a composed 3-D space vector."), Category = "Lightact")
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "String explode to Vector", Keywords = "Lightact string explode to vector", ToolTip = "Splits string by delimiters and returns a composed 3-D space vector."), Category = "Lightact")
 	static void StringExplode(const FString InputString, const FString Delimiters, FVector& Vector);
 };

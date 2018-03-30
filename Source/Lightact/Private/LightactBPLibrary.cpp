@@ -17,6 +17,8 @@ ULightactBPLibrary::ULightactBPLibrary(const FObjectInitializer& ObjectInitializ
 /* Reads a JSON string from shared memory file and outputs a map of strings to strings. */
 void ULightactBPLibrary::BuildMap(const FString HandleName, const int HandleSize, TMap<FString, FString>& resultMap, bool& success) {
 
+	resultMap.Empty();
+
 	HANDLE hMapFile;
 	LPCTSTR pBuf;
 
